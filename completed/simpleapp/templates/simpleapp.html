@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+    <a href="{% url 'logout' %}?next={{request.path}}">Log In</a>
+{% else %}
+    <p>Welcome, new user. Please log in.</p>
+    <a href="{% url 'openid_with_op_name' op_name='mitreid' %}?next={{request.path}}">Log In</a>
+{% endif %}
+<br>
+<p>Here is a link to a <a href="{% url 'protected' %}">protected resource</a></p>
+</body>
+</html>
